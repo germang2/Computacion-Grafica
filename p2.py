@@ -7,7 +7,7 @@ import random
 from clases import *
 
 ANCHO=600
-ALTO=400
+ALTO=600
 
 VERDE=(0,255,0) #verde en RGB
 AZUL=(0,0,255) #azul en RGB
