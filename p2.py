@@ -42,7 +42,7 @@ if __name__== '__main__':
 	pygame.mouse.set_visible(False)
 	terminar = False
 	
-	fondo=pygame.image.load("sol.gif")	
+	fondo=pygame.image.load("space.jpg")	
 	
 	jugador=Usuario("ship.png")	
 	
@@ -63,6 +63,10 @@ if __name__== '__main__':
 	
 	#lista para balas enemigas
 	ls_ebala=pygame.sprite.Group()
+
+	#lista para balas enemigas2
+	ls_ebala2=pygame.sprite.Group()
+
 	
 	#lista de vidas
 	ls_vidas = pygame.sprite.Group()
@@ -122,6 +126,7 @@ if __name__== '__main__':
 	while (not terminar):
 
 		for event in pygame.event.get():
+			pos=pygame.mouse.get_pos()
 			if event.type == pygame.QUIT:
 				sys.exit(0)
 				terminar = True
@@ -176,10 +181,25 @@ if __name__== '__main__':
 					ls_vidas.remove(ep)					
 					ls_ebala.remove(eb)
 					ls_todos.remove(eb)
-					
-					
-						
-										
+
+				if eb.rect.y>ALTO:
+					ls_ebala.remove(eb)
+					ls_todos.remove(eb)	
+
+		#impactos de bala2 al jugador		
+		for ep in ls_vidas:
+			for eb in ls_ebala2:
+				impactado=pygame.sprite.spritecollide(eb,ls_jugador,False)
+				if impactado!=[]:
+					vidaplayer-=1
+					print "vida"+" "+str(vidaplayer)
+					ls_vidas.remove(ep)					
+					ls_ebala2.remove(eb)
+					ls_todos.remove(eb)
+
+				if eb.rect.y>ALTO:
+					ls_ebala2.remove(eb)
+					ls_todos.remove(eb)	
 		
 		#colicion entre jugador, enemigos y otros enemigos	
 		ls_choque=pygame.sprite.spritecollide(jugador,ls_enemigo,False)
@@ -218,7 +238,7 @@ if __name__== '__main__':
 			pantalla.blit(texto6, (10,10))
 			
 		#juego ganado
-		if (puntos==1000):
+		if (puntos==1200):
 			for eb in ls_todos:
 				ls_todos.remove(eb)	
 			for eb in ls_enemigo2:
@@ -256,9 +276,10 @@ if __name__== '__main__':
 			if enemigo.disparar:
 				x=enemigo.rect.x
 				y=enemigo.rect.y
-				bala2=Municionene2("mune2.png",(x,y))
+				puntos_bala=puntomedio((x,y),pos)
+				bala2=Municionene2("mune2.png",(x,y),puntos_bala)
 				bala2.bando=1
-				ls_ebala.add(bala2)
+				ls_ebala2.add(bala2)
 				ls_todos.add(bala2)
 				enemigo.disparar=False
 				

@@ -46,7 +46,7 @@ class	Enemigo(pygame.sprite.Sprite):
 		self.tempe1=30
 		self.bandera=0
 		self.image=self.enemigos[self.actual][0]
-		self.puntos = circunferenciaPuntoMedio((250,100),100)
+		self.puntos = circunferenciaPuntoMedio2((250,100),100)
 		self.indice=posinicial*80
 		self.cant = len(self.puntos)
 
@@ -97,18 +97,25 @@ class	Enemigo2(pygame.sprite.Sprite):
 		self.tempe1=30
 		self.bandera=0
 		self.image=self.enemigos[self.actual][0]
+		self.indice=0
+		self.puntos = circunferenciaPuntoMedio((200,200),100)
+		self.cant = len(self.puntos)
+		self.p=self.puntos[0]		
+		self.aux=0
 		
 	def update(self):
-		if self.rect.x<=0:
-			self.direccion=1
-		if self.rect.x>=(ANCHO-20):
-			self.direccion=0
-		if self.direccion==0:
-			#self.rect.y-=5
-			self.rect.x-=5
-		if self.direccion==1:
-			#self.rect.y+=5
-			self.rect.x+=5
+		if self.indice < self.cant:
+			self.p = self.puntos[self.indice]
+			self.rect.x = self.p[0]
+			self.rect.y = self.p[1]
+			self.indice+=8
+
+		else:
+			if self.aux<=8:
+				self.aux+=1
+				self.indice = self.aux
+			else:
+				self.aux=0 
 				
 		if self.recarga==0:
 			self.recarga=100
@@ -181,16 +188,22 @@ class	Municionene(pygame.sprite.Sprite):
 
 #clase municion eneimga 2			
 class	Municionene2(pygame.sprite.Sprite):
-	def __init__(self, image,posicion):
+	def __init__(self, image,posicion,puntos_bala):
 		pygame.sprite.Sprite.__init__(self)
 		self.image=pygame.image.load("mune2.png")
 		self.rect=self.image.get_rect()
 		self.rect.x=posicion[0]
 		self.rect.y=posicion[1]
 		self.bando=0
+		self.indice=0
+		self.cant = len(puntos_bala)
+		self.puntos = puntos_bala
 			
-	def update(self):
-		if self.bando==0:
-			self.rect.y-=5		
+	def update(self):		
+		p=self.puntos[self.indice]
+		self.rect.x=p[0]
+		self.rect.y=p[1]
+		if self.indice < self.cant-1:
+			self.indice+=1
 		else:
-			self.rect.y+=5
+			self.indice=0
