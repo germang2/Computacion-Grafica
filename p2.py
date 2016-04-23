@@ -16,8 +16,8 @@ BLANCO=(255,255,255)
 NEGRO=(0,0,0)
 
 #enemigo uno		
-def Crearenemigo():
-	enemigo=Enemigo("ene1.png")
+def Crearenemigo(i):
+	enemigo=Enemigo("ene1.png",i)
 	enemigo.rect.x=random.randint(0,ANCHO-20)
 	enemigo.rect.y=random.randint(0,ALTO-250)
 	return enemigo
@@ -32,58 +32,7 @@ def Crearvida(posicion):
 		vidas = Vida("vida.png")
 		vidas.rect.x = (560-posicion)
 		vidas.rect.y = 360
-		return vidas
-
-
-		
-	
-#clase municion		
-class	Municion(pygame.sprite.Sprite):
-	def __init__(self, image,posicion):
-		pygame.sprite.Sprite.__init__(self)
-		self.image=pygame.image.load("muun.png")
-		self.rect=self.image.get_rect()
-		self.rect.x=posicion[0]+5
-		self.rect.y=posicion[1]-10
-		self.bando=0
-			
-	def update(self):
-		if self.bando==0:
-			self.rect.y-=5		
-		else:
-			self.rect.y+=5	
-
-#clase municion enemiga uno
-class	Municionene(pygame.sprite.Sprite):
-	def __init__(self, image,posicion):
-		pygame.sprite.Sprite.__init__(self)
-		self.image=pygame.image.load("mune.png")
-		self.rect=self.image.get_rect()
-		self.rect.x=posicion[0]
-		self.rect.y=posicion[1]
-		self.bando=0
-			
-	def update(self):
-		if self.bando==0:
-			self.rect.y-=5		
-		else:
-			self.rect.y+=5	
-
-#clase municion eneimga 2			
-class	Municionene2(pygame.sprite.Sprite):
-	def __init__(self, image,posicion):
-		pygame.sprite.Sprite.__init__(self)
-		self.image=pygame.image.load("mune2.png")
-		self.rect=self.image.get_rect()
-		self.rect.x=posicion[0]
-		self.rect.y=posicion[1]
-		self.bando=0
-			
-	def update(self):
-		if self.bando==0:
-			self.rect.y-=5		
-		else:
-			self.rect.y+=5				
+		return vidas				
 			
 if __name__== '__main__':
 	
@@ -155,8 +104,8 @@ if __name__== '__main__':
 	
 	
 	#crea el enemigo uno
-	for i in range(5):
-		e=Crearenemigo()
+	for i in range(7):
+		e=Crearenemigo(i)
 		ls_enemigo.add(e)
 		ls_todos.add(e)
 		nenem+=1

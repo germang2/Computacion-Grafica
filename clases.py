@@ -4,6 +4,7 @@ import sys
 from libplano import *
 import os
 import random
+from Bresenham import *
 
 #cargar matriz de sprites
 def cargar_fondo(archivo, ancho, alto):
@@ -33,7 +34,7 @@ class	Usuario(pygame.sprite.Sprite):
 
 #clase enemigo
 class	Enemigo(pygame.sprite.Sprite):
-	def __init__(self, image):
+	def __init__(self, image,posinicial):
 		pygame.sprite.Sprite.__init__(self)
 		self.image=pygame.image.load(image)
 		self.rect=self.image.get_rect()
@@ -45,19 +46,20 @@ class	Enemigo(pygame.sprite.Sprite):
 		self.tempe1=30
 		self.bandera=0
 		self.image=self.enemigos[self.actual][0]
+		self.puntos = circunferenciaPuntoMedio((250,100),100)
+		self.indice=posinicial*80
+		self.cant = len(self.puntos)
 
 	def update(self):
 		
-		if self.rect.x<=0:
-			self.direccion=1
-		if self.rect.x>=(ANCHO-20):
-			self.direccion=0
-		if self.direccion==0:
-			#self.rect.y-=5
-			self.rect.x-=5
-		if self.direccion==1:
-			#self.rect.y+=5
-			self.rect.x+=5
+		if self.indice < self.cant:
+			self.p = self.puntos[self.indice]
+			self.rect.x = self.p[0]
+			self.rect.y = self.p[1]
+			self.indice+=1
+
+		else:
+			self.indice=0
 				
 		if self.recarga==0:
 			self.recarga=100
@@ -144,3 +146,51 @@ class Vida(pygame.sprite.Sprite):
           pygame.sprite.Sprite.__init__(self)
           self.image=pygame.image.load("vida.png")
           self.rect = self.image.get_rect()
+
+#clase municion		
+class	Municion(pygame.sprite.Sprite):
+	def __init__(self, image,posicion):
+		pygame.sprite.Sprite.__init__(self)
+		self.image=pygame.image.load("muun.png")
+		self.rect=self.image.get_rect()
+		self.rect.x=posicion[0]+5
+		self.rect.y=posicion[1]-10
+		self.bando=0
+			
+	def update(self):
+		if self.bando==0:
+			self.rect.y-=5		
+		else:
+			self.rect.y+=5	
+
+#clase municion enemiga uno
+class	Municionene(pygame.sprite.Sprite):
+	def __init__(self, image,posicion):
+		pygame.sprite.Sprite.__init__(self)
+		self.image=pygame.image.load("mune.png")
+		self.rect=self.image.get_rect()
+		self.rect.x=posicion[0]
+		self.rect.y=posicion[1]
+		self.bando=0
+			
+	def update(self):
+		if self.bando==0:
+			self.rect.y-=5		
+		else:
+			self.rect.y+=5	
+
+#clase municion eneimga 2			
+class	Municionene2(pygame.sprite.Sprite):
+	def __init__(self, image,posicion):
+		pygame.sprite.Sprite.__init__(self)
+		self.image=pygame.image.load("mune2.png")
+		self.rect=self.image.get_rect()
+		self.rect.x=posicion[0]
+		self.rect.y=posicion[1]
+		self.bando=0
+			
+	def update(self):
+		if self.bando==0:
+			self.rect.y-=5		
+		else:
+			self.rect.y+=5
