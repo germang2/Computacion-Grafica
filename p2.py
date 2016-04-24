@@ -165,7 +165,7 @@ if __name__== '__main__':
 			ls_impactos=pygame.sprite.spritecollide(bala,ls_enemigo2,True)
 			for elemento in ls_impactos:
 				ls_bala.remove(b)
-				ls_enemigo2.remove(b)
+				ls_todos.remove(b)
 				puntos+=100
 				nenem-=1
 				print puntos
@@ -197,9 +197,9 @@ if __name__== '__main__':
 					ls_ebala2.remove(eb)
 					ls_todos.remove(eb)
 
-				if eb.rect.y>ALTO:
-					ls_ebala2.remove(eb)
-					ls_todos.remove(eb)	
+				if eb.indice == eb.cant-1:
+		   			ls_ebala2.remove(eb)
+		   			ls_todos.remove(eb)	
 		
 		#colicion entre jugador, enemigos y otros enemigos	
 		ls_choque=pygame.sprite.spritecollide(jugador,ls_enemigo,False)
@@ -281,9 +281,7 @@ if __name__== '__main__':
 				bala3.bando=1
 				ls_ebala2.add(bala3)
 				ls_todos.add(bala3)
-				enemigo.disparar=False
-				
-		
+				enemigo.disparar=False		
 		
 		
 		#mapeo del nivel 2
@@ -312,7 +310,7 @@ if __name__== '__main__':
 		
 		ls_todos.draw(pantalla)		
 		ls_vidas.draw(pantalla)
-		ls_enemigo2.draw(pantalla)
+		#ls_enemigo2.draw(pantalla)
 		RELOJ.tick(60)
 		pygame.display.flip()
 		

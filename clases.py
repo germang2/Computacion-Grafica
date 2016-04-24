@@ -207,5 +207,4 @@ class	Municionene2(pygame.sprite.Sprite):
 		self.rect.y=p[1]
 		if self.indice < self.cant-1:
 			self.indice+=1
-		else:
-			self.indice=0
+		
