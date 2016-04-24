@@ -67,48 +67,54 @@ def circunferenciaPuntoMedio2(centro,r):
 	ltotal = l+l5+l6+l2+l4+l8+l7+l3
 	return ltotal
 
-def puntomedio(pto1,pto2):
+def bresenhamrecta(pto1,pto2):
+
 	l=[]
-	if pto2[0]<pto1[0]:
-		aux=pto1
-		pto1=pto2
-		pto2=aux
-	dx=pto2[0]-pto1[0]
-	dy=pto2[1]-pto1[1]
-	m=float(dy)/float(dx)
-	b=pto2[1]-pto2[0]*m
+	dx=abs(pto2[0]-pto1[0])
+	dy=abs(pto2[1]-pto1[1])
 	x=pto1[0]
 	y=pto1[1]
-	#pantalla.set_at((x,y),ROJO)
-	l.append((x,y))
-	pm=y+0.5
-	y=int(m*(x+1)+b)
-	if pto2[1]>=pto1[1]:
-		while x<pto2[0]:
-			if y <= pm:
-				x=x+1
-				#pantalla.set_at((x,y),AZUL)
-				l.append((x,y))
-			else:
-				x=x+1
-				y=y+1
-				#pantalla.set_at((x,y),AZUL)
-				l.append((x,y))
-			y=int(m*(x+1)+b)
-			pm=y+0.5
+	hor=dy<dx
+	if hor:		
+		d=(2*dy)-dx
+		dE=2*dy
+		dNE=2*(dy-dx)
 	else:
-		while x<pto2[0]:
-			if y<= pm:
-				x=x+1
-				#pantalla.set_at((x,y),AZUL)
-				l.append((x,y))
+		d=(2*dx)-dy
+		dE=2*dx
+		dNE=2*(dx-dy)
+	if (pto2[0]-pto1[0])>0:
+		dirx=1
+	else:
+		dirx=-1
+	if (pto2[1]-pto1[1])>0:
+		diry=1
+	else:
+		diry=-1
+	l.append((x,y))
+	#pantalla.set_at((x,y),ROJO)
+
+	if hor:
+		while x!=pto2[0]:
+			if d<=0:
+				d=d+dE
 			else:
-				x=x+1
-				y=y-1
-				#pantalla.set_at((x,y),AZUL)
-				l.append((x,y))
-			y=int(m*(x+1)+b)
-			pm=y+0.5
+				d=d+dNE
+				y+=diry
+			x+=dirx
+			#pantalla.set_at((x,y),ROJO)
+			l.append((x,y))
+	else:
+		while y!=pto2[1]:
+			if d<=0:
+				d=d+dE
+			else:
+				d=d+dNE
+				x+=dirx
+			y+=diry
+			#pantalla.set_at((x,y),ROJO)
+			l.append((x,y))
+	#print (x,y)
 	return l
 
 def circunferenciaPuntoMedio(centro,r):

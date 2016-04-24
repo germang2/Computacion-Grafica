@@ -276,11 +276,11 @@ if __name__== '__main__':
 			if enemigo.disparar:
 				x=enemigo.rect.x
 				y=enemigo.rect.y
-				puntos_bala=puntomedio((x,y),pos)
-				bala2=Municionene2("mune2.png",(x,y),puntos_bala)
-				bala2.bando=1
-				ls_ebala2.add(bala2)
-				ls_todos.add(bala2)
+				puntos_bala=bresenhamrecta((x,y),pos)
+				bala3=Municionene2("mune2.png",(x,y),puntos_bala)
+				bala3.bando=1
+				ls_ebala2.add(bala3)
+				ls_todos.add(bala3)
 				enemigo.disparar=False
 				
 		

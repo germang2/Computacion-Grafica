@@ -98,7 +98,9 @@ class	Enemigo2(pygame.sprite.Sprite):
 		self.bandera=0
 		self.image=self.enemigos[self.actual][0]
 		self.indice=0
-		self.puntos = circunferenciaPuntoMedio((200,200),100)
+		self.x= random.randrange(200,ANCHO-100) 
+		self.y= random.randrange(0,200)
+		self.puntos = circunferenciaPuntoMedio((self.x,self.y),60)
 		self.cant = len(self.puntos)
 		self.p=self.puntos[0]		
 		self.aux=0
