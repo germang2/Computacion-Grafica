@@ -90,7 +90,7 @@ class	Enemigo2(pygame.sprite.Sprite):
 		self.image=pygame.image.load(image)
 		self.rect=self.image.get_rect()
 		self.direccion=0
-		self.recarga=100
+		self.recarga=150
 		self.disparar=False
 		self.enemigos = cargar_fondo("ene2.png", 49, 50)		
 		self.actual=0
@@ -120,7 +120,7 @@ class	Enemigo2(pygame.sprite.Sprite):
 				self.aux=0 
 				
 		if self.recarga==0:
-			self.recarga=100
+			self.recarga=150
 			self.disparar=True
 		else:
 			self.recarga-=1		
@@ -207,4 +207,5 @@ class	Municionene2(pygame.sprite.Sprite):
 		self.rect.y=p[1]
 		if self.indice < self.cant-1:
 			self.indice+=1
+		
 		

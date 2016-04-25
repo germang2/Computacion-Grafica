@@ -31,7 +31,7 @@ def Crearenemigo2():
 def Crearvida(posicion):		
 		vidas = Vida("vida.png")
 		vidas.rect.x = (560-posicion)
-		vidas.rect.y = 360
+		vidas.rect.y = 560
 		return vidas				
 			
 if __name__== '__main__':
@@ -177,7 +177,7 @@ if __name__== '__main__':
 				impactado=pygame.sprite.spritecollide(eb,ls_jugador,False)
 				if impactado!=[]:
 					vidaplayer-=1
-					print "vida"+" "+str(vidaplayer)
+					print str(vidaplayer)+"				"
 					ls_vidas.remove(ep)					
 					ls_ebala.remove(eb)
 					ls_todos.remove(eb)
@@ -192,7 +192,7 @@ if __name__== '__main__':
 				impactado=pygame.sprite.spritecollide(eb,ls_jugador,False)
 				if impactado!=[]:
 					vidaplayer-=1
-					print "vida"+" "+str(vidaplayer)
+					print str(vidaplayer)+""
 					ls_vidas.remove(ep)					
 					ls_ebala2.remove(eb)
 					ls_todos.remove(eb)
@@ -213,6 +213,8 @@ if __name__== '__main__':
 				ban=1
 				nenem=-10				
 				nvl=1
+				ls_bala.empty()
+				ls_ebala.empty()
 		
 		if ban==1:
 			#crea enemigo numero 2
@@ -232,11 +234,12 @@ if __name__== '__main__':
 			for eb in ls_vidas:
 				ls_vidas.remove(eb)		
 			pantalla.fill(NEGRO)
-			pantalla.blit(texto3, (130,150))
+			pantalla.blit(texto3, (140,250))
 		else:
-			pantalla.blit(texto4, (510,10))
-			pantalla.blit(texto6, (10,10))
-			
+			if puntos != 1200:
+				pantalla.blit(texto4, (510,10))
+				pantalla.blit(texto6, (10,10))
+				
 		#juego ganado
 		if (puntos==1200):
 			for eb in ls_todos:
@@ -246,7 +249,7 @@ if __name__== '__main__':
 			for eb in ls_vidas:
 				ls_vidas.remove(eb)		
 			#pantalla.fill(NEGRO)
-			pantalla.blit(texto5, (160,160))	
+			pantalla.blit(texto5, (170,260))	
 		
 		#tiempo final del juego
 		if tiempojuego==0:
@@ -287,20 +290,24 @@ if __name__== '__main__':
 		#mapeo del nivel 2
 		if nvl==1:
 			fondo=pygame.image.load("galaxy.jpg")
+			pantalla.blit(fondo, (0,0))
+			pantalla.blit(texto2, (210,250))
+			pygame.display.flip()
 			tiempo=100
+			pygame.time.delay(1000)
 			tnivel=2
 			nvl=100
 		
 		#tiempo texto en la pantalla del nivel
 		if tnivel==0:
-			pantalla.blit(texto1, (200,150))	
+			pantalla.blit(texto1, (210,250))	
 			tiempo-=2
 			if tiempo==0:
 				tnivel=1
 				tiempo=30
 		#tiempo texto en la pantalla del nivel 2		
 		if tnivel==2:
-			pantalla.blit(texto2, (200,150))
+			pantalla.blit(texto2, (210,250))
 			tiempo-=2
 			if tiempo==0:
 				tnivel=1
