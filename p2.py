@@ -152,23 +152,29 @@ if __name__== '__main__':
 		
 		#cuando la bala choca con enemigo
 		for b in ls_bala:		
-			ls_impactos=pygame.sprite.spritecollide(bala,ls_enemigo,True)
+			ls_impactos=pygame.sprite.spritecollide(bala,ls_enemigo,False)
 			for elemento in ls_impactos:
-				ls_bala.remove(b)
-				ls_todos.remove(b)
-				puntos+=100
-				nenem-=1
-				print puntos
+				if b.rect.x <= elemento.rect.x+60:
+					ls_bala.remove(b)
+					ls_enemigo.remove(elemento)
+					ls_todos.remove(elemento)
+					ls_todos.remove(b)
+					puntos+=100
+					nenem-=1
+					print puntos
 		
 		#cuando la bala choca con enemigo dos
 		for b in ls_bala:		
-			ls_impactos=pygame.sprite.spritecollide(bala,ls_enemigo2,True)
+			ls_impactos=pygame.sprite.spritecollide(bala,ls_enemigo2,False)
 			for elemento in ls_impactos:
-				ls_bala.remove(b)
-				ls_todos.remove(b)
-				puntos+=100
-				nenem-=1
-				print puntos
+				if b.rect.x <= elemento.rect.x+40:
+					ls_bala.remove(b)
+					ls_enemigo2.remove(elemento)
+					ls_todos.remove(elemento)
+					ls_todos.remove(b)
+					puntos+=100
+					nenem-=1
+					print puntos
 		
 		#impactos de bala al jugador		
 		
@@ -292,6 +298,7 @@ if __name__== '__main__':
 			fondo=pygame.image.load("galaxy.jpg")
 			pantalla.blit(fondo, (0,0))
 			pantalla.blit(texto2, (210,250))
+			ls_ebala.empty()
 			pygame.display.flip()
 			tiempo=100
 			pygame.time.delay(1000)
