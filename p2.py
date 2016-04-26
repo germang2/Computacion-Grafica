@@ -203,7 +203,7 @@ if __name__== '__main__':
 					ls_ebala2.remove(eb)
 					ls_todos.remove(eb)
 
-				if eb.indice == eb.cant-1:
+				if eb.indice >= eb.cant-1:
 		   			ls_ebala2.remove(eb)
 		   			ls_todos.remove(eb)	
 		
