@@ -70,6 +70,9 @@ if __name__== '__main__':
 	
 	#lista de vidas
 	ls_vidas = pygame.sprite.Group()
+
+	#lista de explosiones
+	ls_explosion = pygame.sprite.Group()
 	
 		
 	#reloj de python
@@ -155,6 +158,9 @@ if __name__== '__main__':
 			ls_impactos=pygame.sprite.spritecollide(bala,ls_enemigo,False)
 			for elemento in ls_impactos:
 				if b.rect.x <= elemento.rect.x+60:
+					x=elemento.rect.x
+					y=elemento.rect.y
+
 					ls_bala.remove(b)
 					ls_enemigo.remove(elemento)
 					ls_todos.remove(elemento)
@@ -162,12 +168,21 @@ if __name__== '__main__':
 					puntos+=100
 					nenem-=1
 					print puntos
+
+					expl=explosion("explosion.png")
+					expl.rect.x=x
+					expl.rect.y=y
+					ls_explosion.add(expl)
+					ls_todos.add(expl)
 		
 		#cuando la bala choca con enemigo dos
 		for b in ls_bala:		
 			ls_impactos=pygame.sprite.spritecollide(bala,ls_enemigo2,False)
 			for elemento in ls_impactos:
 				if b.rect.x <= elemento.rect.x+40:
+					x=elemento.rect.x
+					y=elemento.rect.y
+
 					ls_bala.remove(b)
 					ls_enemigo2.remove(elemento)
 					ls_todos.remove(elemento)
@@ -175,6 +190,12 @@ if __name__== '__main__':
 					puntos+=100
 					nenem-=1
 					print puntos
+
+					expl=explosion("explosion.png")
+					expl.rect.x=x
+					expl.rect.y=y
+					ls_explosion.add(expl)
+					ls_todos.add(expl)
 		
 		#impactos de bala al jugador		
 		

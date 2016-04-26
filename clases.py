@@ -207,5 +207,17 @@ class	Municionene2(pygame.sprite.Sprite):
 		self.rect.y=p[1]
 		if self.indice < self.cant-1:
 			self.indice+=4
-		
-		
+
+class explosion(pygame.sprite.Sprite):
+	def __init__(self, image):
+		pygame.sprite.Sprite.__init__(self)
+		self.image=pygame.image.load(image)
+		self.rect=self.image.get_rect()
+		self.explotar = cargar_fondo("explosion.png", 40, 40)
+		self.actual=0
+		self.image=self.explotar[self.actual][0]
+
+	def update(self):
+		if self.actual<7:
+			self.actual+=1
+		self.image=self.explotar[self.actual][0]
