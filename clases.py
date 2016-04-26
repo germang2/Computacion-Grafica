@@ -213,11 +213,16 @@ class explosion(pygame.sprite.Sprite):
 		pygame.sprite.Sprite.__init__(self)
 		self.image=pygame.image.load(image)
 		self.rect=self.image.get_rect()
-		self.explotar = cargar_fondo("explosion.png", 40, 40)
+		self.explotar = cargar_fondo("explosion.png", 64, 64)
 		self.actual=0
-		self.image=self.explotar[self.actual][0]
+		self.j=0
+		self.image=self.explotar[self.actual][self.j]
 
 	def update(self):
-		if self.actual<7:
-			self.actual+=1
-		self.image=self.explotar[self.actual][0]
+		if self.j<3:
+			if self.actual<3:
+				self.actual+=1
+			else:
+				self.actual=0
+				self.j+=1
+			self.image=self.explotar[self.actual][self.j]

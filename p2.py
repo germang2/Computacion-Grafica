@@ -342,7 +342,11 @@ if __name__== '__main__':
 				tiempo=30		
 		
 		
-		
+		for exp in ls_explosion:
+			if exp.j>=3:
+				ls_explosion.remove(exp)
+				ls_todos.remove(exp)
+
 		ls_todos.draw(pantalla)		
 		ls_vidas.draw(pantalla)
 		#ls_enemigo2.draw(pantalla)
